@@ -47,6 +47,7 @@ export default {
     - 3.2 使用 @babel/traverse 对 AST 解析文件依赖生成依赖描述
     - 3.3 使用 @babel/core 的 transformFromAst 对 AST 中的文件代码转换成 es5
     - 3.4 根据文件依赖关系递归解析输出所有依赖项
+    * 
 ```javascript
 [
   {
