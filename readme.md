@@ -194,3 +194,5 @@ export default {
 ```
 
 贴张 main.js 执行流程的图方便理解
+![alt main.js 执行流程](https://raw.githubusercontent.com/cenmen/imitation-webpack/master/dist/main.png)
+![alt main.js 控制台输出结果](https://raw.githubusercontent.com/cenmen/imitation-webpack/master/dist/log.png)
