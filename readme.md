@@ -1,4 +1,4 @@
-## 手写 webpack 原理
+## 手写简易 webpack 原理
 
 参考文章：<br>
 https://segmentfault.com/a/1190000021494964<br>
@@ -193,6 +193,7 @@ export default {
 ] 
 ```
 
-贴张 main.js 执行流程的图方便理解
+### main.js 执行流程图解
 ![alt main.js 执行流程](https://raw.githubusercontent.com/cenmen/imitation-webpack/master/dist/main.png)
+### main.js 执行控制台输出结果
 ![alt main.js 控制台输出结果](https://raw.githubusercontent.com/cenmen/imitation-webpack/master/dist/log.png)
