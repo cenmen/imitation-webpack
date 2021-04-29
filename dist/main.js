@@ -2,12 +2,13 @@
   function require(filename) {
     const { fn, dependecies } = graph[filename];
     function localRequire(relativePath) {
-      //根据模块的路径在mapping中找到对应的模块id
+      //根据模块的路径在 dependecies 中找到对应的模块
       return require(dependecies[relativePath]);
     }
     const module = { exports: {} };
-    //执行每个模块的代码。
+    //执行每个模块的代码
     fn(localRequire, module, module.exports);
+    console.log("main.js bundle :", filename, module, module.exports);
     return module.exports;
   }
   //执行入口文件，
@@ -31,9 +32,9 @@
 
       console.log("i am index.js");
 
-      _user["default"].log();
+      _user["default"].log("index.js");
 
-      _info["default"].log();
+      _info["default"].log("index.js");
     },
   },
 
@@ -46,9 +47,10 @@
         value: true,
       });
       exports["default"] = void 0;
+      console.log("i am user.js");
       var _default = {
-        log: function log() {
-          console.log("i am user.js");
+        log: function log(username) {
+          console.log("i am user.js used by the " + username);
         },
       };
       exports["default"] = _default;
@@ -71,9 +73,13 @@
         return obj && obj.__esModule ? obj : { default: obj };
       }
 
+      console.log("i am info.js");
+
+      _goods["default"].log("info.js");
+
       var _default = {
-        log: function log() {
-          console.log("i am info.js");
+        log: function log(username) {
+          console.log("i am info.js used by the " + username);
         },
       };
       exports["default"] = _default;
@@ -89,9 +95,10 @@
         value: true,
       });
       exports["default"] = void 0;
+      console.log("i am goods.js");
       var _default = {
-        log: function log() {
-          console.log("i am goods.js");
+        log: function log(username) {
+          console.log("i am goods.js used by the " + username);
         },
       };
       exports["default"] = _default;

@@ -1,5 +1,7 @@
+console.log('i am user.js')
+
 export default {
-  log() {
-    console.log('i am user.js')
+  log(username) {
+    console.log('i am user.js used by the ' + username)
   }
 }

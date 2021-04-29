@@ -88,12 +88,13 @@ function bundle(graph, options) {
     function require(filename){
       const {fn, dependecies} = graph[filename];
       function localRequire(relativePath){
-        //根据模块的路径在dependecies中找到对应的模块
+        //根据模块的路径在 dependecies 中找到对应的模块
         return require(dependecies[relativePath]);
       }
       const module = {exports:{}};
       //执行每个模块的代码。
       fn(localRequire, module, module.exports);
+      console.log('${options.output.filename} bundle :', filename, module, module.exports)
       return module.exports;
     }
     //执行入口文件，

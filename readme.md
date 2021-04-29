@@ -1,6 +1,6 @@
 ## 手写 webpack 原理
 
-参考文章：
+参考文章：<br>
 https://segmentfault.com/a/1190000021494964<br>
 https://zhuanlan.zhihu.com/p/58151131  
 
@@ -13,14 +13,16 @@ import user from './utils/user'
 import info from './utils/info'
 
 console.log('i am index.js')
-user.log()
-info.log()
+user.log('index.js')
+info.log('index.js')
 ```
 ```javascript
 /* ./src/utils/user.js */
+console.log('i am user.js')
+
 export default {
-  log() {
-    console.log('i am user.js')
+  log(username) {
+    console.log('i am user.js used by the ' + username)
   }
 }
 ```
@@ -28,17 +30,22 @@ export default {
 /* ./src/utils/info.js */
 import goods from './goods'
 
+console.log('i am info.js')
+goods.log('info.js')
+
 export default {
-  log() {
-    console.log('i am info.js')
+  log(username) {
+    console.log('i am info.js used by the ' + username)
   }
 }
 ```
 ```javascript
 /* ./src/utils/goods.js */
+console.log('i am goods.js')
+
 export default {
-  log() {
-    console.log('i am goods.js')
+  log(username) {
+    console.log('i am goods.js used by the ' + username)
   }
 }
 ```
@@ -47,8 +54,12 @@ export default {
     - 3.2 使用 @babel/traverse 对 AST 解析文件依赖生成依赖描述
     - 3.3 使用 @babel/core 的 transformFromAst 对 AST 中的文件代码转换成 es5
     - 3.4 根据文件依赖关系递归解析输出所有依赖项
-    * 
+    - 3.5 根据 3.4 的依赖关系生成想要运行的代码字符串
+    - 3.6 编写核心启动代码字符串（重点！！！后面讲解）
+    - 3.7 根据字符串使用 fs.writeFileSync 把文件内容写入到文件系统
+    - 3.8 执行 node webpack.js 运行生成 ./dist/main.js 文件
 ```javascript
+/* 3.4 输出的依赖项 */
 [
   {
     filename: './src/index.js',
@@ -181,7 +192,5 @@ export default {
   }
 ] 
 ```
-    - 3.5 根据 3.4 的依赖关系生成想要运行的代码字符串
-    - 3.6 编写核心启动代码字符串（重点！！！后面讲解）
-    - 3.7 根据字符串使用 fs.writeFileSync 把文件内容写入到文件系统
-    - 3.8 执行 node webpack.js 运行生成 ./dist/main.js 文件
+
+贴张 main.js 执行流程的图方便理解
